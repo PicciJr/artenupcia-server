@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 
-app.get('/send-email', (req, res) => {
+app.post('/send-email', (req, res, next) => {
   var transporter = nodemailer.createTransport({
     service: 'Gmail',
     host: 'smtp.gmail.com',
@@ -51,21 +51,23 @@ app.get('/send-email', (req, res) => {
   })
 
   var mailOptions = {
-    from: "Remitente",
+    from: 'Artenupcia - Invitaciones de Boda personalizadas',
     to: req.body.email,
-    subject: "Enviado desde nodemailer",
-    text: "Hola mundo",
+    subject: 'Gracias por contactar con Artenupcia',
     html: `<!doctype html>
     <html>
       <head>
         <meta charset="utf-8">
         <style>
-        body{
-          visibility:hidden;
-        }
         .titulo{
           background:blue;
           color:red;
+        }
+
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
         }
 
         </style>
@@ -79,7 +81,7 @@ app.get('/send-email', (req, res) => {
 
       </body>
     </html>`,
-  };
+  }
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
