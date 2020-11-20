@@ -7,7 +7,6 @@ var nodemailer = require('nodemailer')
 var cors = require('cors')
 var bodyParser = require('body-parser')
 
-
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 
@@ -51,18 +50,24 @@ app.get('/send-email', (req, res) => {
 
   var mailOptions = {
     from: 'Remitente',
-    to: 'jquedi@hotmail.com',
+    to: 'andypizu@hotmail.com',
     subject: 'Enviado desde nodemailer',
     text: 'Hola mundo',
-    html: '<button>Twitter</button>',
+    html: `<html>
+      <head>
+        <body>
+          <h1 style="text-align: center;">Gracias por contactar con Artenupcia</h1>
+        </body>
+      </head>
+    </html>`,
   }
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       res.status(500).send(error.message)
+      next(error)
     } else {
-      console.log('Email enviado')
-      res.status(200).jsonp(req.body)
+      return res.status(200).jsonp(req.body)
     }
   })
 })
