@@ -13,6 +13,8 @@ var usersRouter = require('./routes/users')
 var port = 8000
 var app = express()
 
+app.use(bodyParser.urlencoded({ extended: true }))
+
 app.use(cors())
 
 // view engine setup
@@ -49,17 +51,35 @@ app.get('/send-email', (req, res) => {
   })
 
   var mailOptions = {
-    from: 'Artemupcia - Invitaciones de Boda personalizadas',
-    to: 'andypizu@hotmail.com',
-    subject: 'Gracias por contactar con Artenupcia',
-    html: `<html>
+    from: "Remitente",
+    to: req.body.email,
+    subject: "Enviado desde nodemailer",
+    text: "Hola mundo",
+    html: `<!doctype html>
+    <html>
       <head>
-        <body>
-          <h1 style="text-align: center;">Gracias por contactar con Artenupcia</h1>
-        </body>
+        <meta charset="utf-8">
+        <style>
+        body{
+          visibility:hidden;
+        }
+        .titulo{
+          background:blue;
+          color:red;
+        }
+
+        </style>
       </head>
+      <body>
+        <h1 class="titulo">Hola Mundo!</h1>
+
+        <a href="http://twitter.com">
+          <img src="http://cdn.pccomponentes.com/img/emails/pccomponentes-minilogo-default-mar18.png" alt="PcComponentes" title="PcComponentes">
+        </a>
+
+      </body>
     </html>`,
-  }
+  };
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
