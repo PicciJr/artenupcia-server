@@ -49,10 +49,9 @@ app.get('/send-email', (req, res) => {
   })
 
   var mailOptions = {
-    from: 'Remitente',
+    from: 'Artemupcia - Invitaciones de Boda personalizadas',
     to: 'andypizu@hotmail.com',
-    subject: 'Enviado desde nodemailer',
-    text: 'Hola mundo',
+    subject: 'Gracias por contactar con Artenupcia',
     html: `<html>
       <head>
         <body>
