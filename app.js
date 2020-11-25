@@ -26,7 +26,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 
-
 /** Send email function */
 app.post('/send-email', (req, res, next) => {
   var transporter = nodemailer.createTransport({
@@ -64,12 +63,7 @@ app.post('/send-email', (req, res, next) => {
         </style>
       </head>
       <body>
-        <h1 class="titulo">Hola Mundo!</h1>
-
-        <a href="http://twitter.com">
-          <img src="http://cdn.pccomponentes.com/img/emails/pccomponentes-minilogo-default-mar18.png" alt="PcComponentes" title="PcComponentes">
-        </a>
-
+       <p>Probando Digital Ocean</p>
       </body>
     </html>`,
   }
