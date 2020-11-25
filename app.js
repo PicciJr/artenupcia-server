@@ -17,10 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(cors())
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'jade')
-
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -30,6 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 
+
+/** Send email function */
 app.post('/send-email', (req, res, next) => {
   var transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -41,13 +39,6 @@ app.post('/send-email', (req, res, next) => {
       user: 'jquediprueba@gmail.com',
       pass: 'Contrasena1234',
     },
-    /* host: "smtp.ethereal.email",
-    post: 587,
-    secure: false,
-    auth: {
-      user:"laury.wilderman@ethereal.email",
-      pass: "PR7uAm11wdU8RngrAg",
-    },*/
   })
 
   var mailOptions = {
